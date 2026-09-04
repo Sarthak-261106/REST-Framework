@@ -16,3 +16,6 @@ class PostView(ModelViewSet):
     permission_classes = [IsAuthenticated, IsPostProcessor]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def get_queryset(self):
+        return Post.objects.filter(created_by=self.request.user)
